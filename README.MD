@@ -30,7 +30,7 @@ npm install
 npm run dev
 ```
 
-#### 1. Backend
+#### 2. Backend
 
 Open a terminal and navigate to the `backend` directory:
 
