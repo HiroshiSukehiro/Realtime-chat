@@ -1,6 +1,6 @@
 # Simple Chat Application
 
-This is a simple chat application based on ChatEngine (the service is not working at the moment).
+This is a simple chat application based on ChatEngine.
 
 ## Technologies Used
 
