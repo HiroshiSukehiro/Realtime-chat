@@ -1,27 +1,32 @@
+import axios from "axios";
+
 const AuthPage = (props: any) => {
-    const onSubmit = (e: any) => {
-      e.preventDefault();
-      const { value } = e.target[0];
-      props.onAuth({ username: value, secret: value });
-    };
-  
-    return (
-      <div className="background">
-        <form onSubmit={onSubmit} className="form-card">
-          <div className="form-title">Welcome 👋</div>
-  
-          <div className="form-subtitle">Set a username to get started</div>
-  
-          <div className="auth">
-            <div className="auth-label">Username</div>
-            <input className="auth-input" name="username" />
-            <button className="auth-button" type="submit">
-              Enter
-            </button>
-          </div>
-        </form>
-      </div>
-    );
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    const { value } = e.target[0];
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/authenticate`, { username: value, secret: import.meta.env.VITE_SECRET })
+      .then((r) => props.onAuth({ ...r.data, secret: import.meta.env.VITE_SECRET }))
+      .catch((e) => console.log("error: ", e));
   };
-  
-  export default AuthPage;
+
+  return (
+    <div className="background">
+      <form onSubmit={onSubmit} className="form-card">
+        <div className="form-title">Welcome 👋</div>
+
+        <div className="form-subtitle">Set a username to get started</div>
+
+        <div className="auth">
+          <div className="auth-label">Username</div>
+          <input className="auth-input" name="username" />
+          <button className="auth-button" type="submit">
+            Enter
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AuthPage;
